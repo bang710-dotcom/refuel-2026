@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f2540">
+<title>REFUEL Conference · 강의 신청</title>
+<meta property="og:title" content="REFUEL Conference 강의 신청">
+<meta property="og:description" content="영락교회 교육부 교사 재충전 컨퍼런스 · 8월 29일(토) 15:00~18:00">
+<style>
+  :root{
+    --navy:#0f2540; --navy2:#1b3a5f; --orange:#ff7a45; --orange-d:#e85f2a;
+    --green:#1faa6b; --amber:#e6a100; --red:#d33a3a;
+    --ink:#1a2230; --sub:#5a6b82; --line:#e4e9f0; --bg:#f5f7fa; --card:#fff;
+    --shadow:0 4px 20px rgba(15,37,64,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",Roboto,"Noto Sans KR",sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6; -webkit-text-size-adjust:100%;}
+  img{display:block; max-width:100%}
+  a{color:inherit}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0f2540 0%,#1b3a5f 55%,#264d78 100%); color:#fff;
+    padding:38px 20px 30px; text-align:center; position:relative; overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(255,122,69,.35),transparent 70%);}
+  .brand{font-weight:800;letter-spacing:.14em;font-size:13px;color:var(--orange);margin-bottom:10px}
+  .hero h1{margin:0;font-size:30px;font-weight:800;letter-spacing:-.01em}
+  .hero .ko{font-size:15px;color:#cfe0f2;margin-top:6px;font-weight:500}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    padding:6px 13px;border-radius:999px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+  .lead{max-width:640px;margin:16px auto 0;font-size:13.5px;color:#b9cbe0;line-height:1.7}
+
+  .wrap{max-width:920px;margin:0 auto;padding:22px 16px 80px}
+
+  .schedule{background:var(--card);border-radius:16px;box-shadow:var(--shadow);
+    padding:16px 18px;margin:-26px auto 26px;max-width:520px;position:relative;z-index:2}
+  .schedule h3{margin:0 0 10px;font-size:14px;color:var(--sub);font-weight:700;letter-spacing:.02em}
+  .sched-row{display:flex;align-items:center;gap:12px;padding:7px 0;font-size:14.5px}
+  .sched-row+.sched-row{border-top:1px dashed var(--line)}
+  .sched-time{font-weight:800;color:var(--navy);min-width:104px;font-variant-numeric:tabular-nums}
+  .sched-row.hi .sched-time{color:var(--orange-d)}
+  .sched-row.hi{font-weight:600}
+
+  .section-title{font-size:20px;font-weight:800;margin:8px 4px 4px}
+  .section-sub{font-size:13.5px;color:var(--sub);margin:0 4px 18px}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;border:2px solid transparent;transition:border-color .15s}
+  .card.selected{border-color:var(--orange)}
+  .card.full{opacity:.85}
+  .ph{position:relative;aspect-ratio:1/1;background:#dde4ee}
+  .ph img{width:100%;height:100%;object-fit:cover}
+  .cat{position:absolute;left:12px;top:12px;background:rgba(15,37,64,.92);color:#fff;
+    font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.02em}
+  .seat{position:absolute;right:12px;top:12px;font-size:12px;font-weight:800;
+    padding:5px 11px;border-radius:999px;color:#fff;background:var(--green);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  .seat.amber{background:var(--amber)} .seat.red{background:var(--red)}
+  .seat.load{background:#8aa0b8}
+  .cbody{padding:15px 16px 16px;display:flex;flex-direction:column;flex:1}
+  .ctitle{font-size:18px;font-weight:800;margin:0 0 3px;letter-spacing:-.01em}
+  .cspk{font-size:14px;color:var(--orange-d);font-weight:700;margin-bottom:9px}
+  .cbio{font-size:13px;color:var(--sub);line-height:1.62;margin:0}
+  .cbio ul{margin:6px 0 0;padding-left:17px} .cbio li{margin:2px 0}
+  .more-btn{background:none;border:none;color:var(--navy2);font-size:12.5px;font-weight:700;
+    padding:8px 0 0;cursor:pointer;text-align:left}
+  .more{display:none} .more.open{display:block}
+  .cfoot{margin-top:auto;padding-top:14px}
+  .barwrap{height:7px;background:#eef1f6;border-radius:4px;overflow:hidden;margin-bottom:10px}
+  .bar{height:100%;width:0;background:var(--green);border-radius:4px;transition:width .4s}
+  .bar.amber{background:var(--amber)} .bar.red{background:var(--red)}
+  .pick{width:100%;border:none;background:var(--navy);color:#fff;font-size:15px;font-weight:700;
+    padding:13px;border-radius:12px;cursor:pointer;font-family:inherit;transition:background .15s}
+  .pick:hover{background:var(--navy2)}
+  .pick.sel{background:var(--orange)} .pick.sel:hover{background:var(--orange-d)}
+  .pick:disabled{background:#c2ccda;cursor:not-allowed}
+
+  /* FORM */
+  .form-card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:22px 20px;margin-top:28px}
+  .form-card h2{margin:0 0 4px;font-size:20px;font-weight:800}
+  .form-card .hint{font-size:13.5px;color:var(--sub);margin:0 0 18px}
+  .selbox{display:flex;align-items:center;gap:12px;background:#f0f5ff;border:1px solid #d5e2f5;
+    border-radius:12px;padding:12px 14px;margin-bottom:18px}
+  .selbox.empty{background:#fdf0eb;border-color:#f6d3c4}
+  .selbox .lbl{font-size:12px;color:var(--sub);font-weight:700}
+  .selbox .val{font-size:15.5px;font-weight:800;color:var(--navy)}
+  .selbox.empty .val{color:var(--orange-d);font-weight:700;font-size:14.5px}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:6px}
+  .field label .req{color:var(--orange-d)}
+  .field input{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;
+    font-size:16px;font-family:inherit;background:#fbfcfe;transition:border-color .15s}
+  .field input:focus{outline:none;border-color:var(--navy2);background:#fff}
+  .field .fh{font-size:12px;color:var(--sub);margin-top:5px}
+  .submit{width:100%;border:none;background:var(--orange);color:#fff;font-size:17px;font-weight:800;
+    padding:16px;border-radius:13px;cursor:pointer;font-family:inherit;margin-top:6px;transition:background .15s}
+  .submit:hover{background:var(--orange-d)} .submit:disabled{background:#c2ccda;cursor:not-allowed}
+  .msg{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:14px;font-weight:600;display:none}
+  .msg.show{display:block}
+  .msg.ok{background:#e6f7ee;color:#12764a;border:1px solid #b7e6cd}
+  .msg.err{background:#fde8e8;color:#b62a2a;border:1px solid #f6c9c9}
+  .msg.warn{background:#fff6e0;color:#8a6100;border:1px solid #f2dea0}
+  .msg .act{display:inline-block;margin-top:9px;background:var(--navy);color:#fff;border:none;
+    padding:9px 15px;border-radius:9px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+
+  .footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:34px;line-height:1.7}
+  .config-warn{background:#fff6e0;border:1px solid #f2dea0;color:#8a6100;border-radius:12px;
+    padding:14px 16px;margin-bottom:20px;font-size:13.5px;font-weight:600;display:none}
+
+  /* success overlay */
+  .done{position:fixed;inset:0;background:rgba(15,37,64,.55);display:none;align-items:center;
+    justify-content:center;padding:24px;z-index:50}
+  .done.show{display:flex}
+  .done-card{background:#fff;border-radius:20px;max-width:380px;width:100%;padding:30px 26px;text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .done-ic{width:64px;height:64px;border-radius:50%;background:#e6f7ee;color:var(--green);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:34px;font-weight:800}
+  .done-card h3{margin:0 0 6px;font-size:22px;font-weight:800}
+  .done-card p{margin:4px 0;font-size:14.5px;color:var(--sub)}
+  .done-card .big{font-size:16px;color:var(--navy);font-weight:800;margin:12px 0 4px}
+  .done-close{margin-top:20px;width:100%;border:none;background:var(--navy);color:#fff;
+    font-size:15px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="brand">REFUEL CONFERENCE 2026</div>
+    <h1>다시, 채우다</h1>
+    <div class="ko">영락교회 교육부 교사 재충전 컨퍼런스</div>
+    <div class="meta">
+      <span class="chip">📅 8월 29일 (토)</span>
+      <span class="chip">🕒 오후 3:00 ~ 6:00</span>
+      <span class="chip">👩‍🏫 교육부 교사</span>
+    </div>
+    <p class="lead">그동안 교육부 하반기 기도회로 이어온 교사들의 재충전과 계속교육을,
+      올해 <b>REFUEL 컨퍼런스</b>로 새롭게 시작합니다.
+      아래 5개 선택강의 중 <b>한 강의</b>를 미리 신청해 주세요.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="schedule">
+      <h3>당일 일정</h3>
+      <div class="sched-row"><span class="sched-time">3:00 ~ 3:30</span><span>예배</span></div>
+      <div class="sched-row hi"><span class="sched-time">3:30 ~ 5:00</span><span>선택강의 <b>(신청 대상)</b></span></div>
+      <div class="sched-row"><span class="sched-time">5:00 ~ 6:00</span><span>저녁식사 및 부서별 모임</span></div>
+    </div>
+
+    <div id="configWarn" class="config-warn"></div>
+
+    <h2 class="section-title">선택강의 신청</h2>
+    <p class="section-sub">각 강의는 <b>최대 80명</b>까지 신청할 수 있습니다. 강의를 선택한 뒤 아래에서 신청 정보를 입력해 주세요.</p>
+
+    <div id="grid" class="grid"></div>
+
+    <div class="form-card" id="formCard">
+      <h2>신청 정보 입력</h2>
+      <p class="hint">본인 확인 및 명단 관리를 위해 정확히 입력해 주세요.</p>
+      <div class="selbox empty" id="selBox">
+        <div>
+          <div class="lbl">선택한 강의</div>
+          <div class="val" id="selVal">위에서 강의를 선택해 주세요</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>부서 <span class="req">*</span></label>
+        <input id="fDept" list="deptList" placeholder="예) 초등부" autocomplete="off">
+        <datalist id="deptList">
+          <option value="영아부"></option><option value="유아부"></option>
+          <option value="유치부"></option><option value="유년부"></option>
+          <option value="초등부"></option><option value="소년부"></option>
+          <option value="중등부"></option><option value="고등부"></option>
+          <option value="영어예배부"></option><option value="교육부 교역자"></option>
+        </datalist>
+      </div>
+      <div class="field">
+        <label>이름 <span class="req">*</span></label>
+        <input id="fName" placeholder="홍길동" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>휴대전화 <span class="req">*</span></label>
+        <input id="fPhone" inputmode="numeric" placeholder="010-1234-5678" autocomplete="tel" maxlength="13">
+        <div class="fh">본인 확인용으로 사용됩니다. 신청 변경 시에도 이 번호로 조회합니다.</div>
+      </div>
+      <button class="submit" id="submitBtn">신청하기</button>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <div class="footer">
+      문의 · 영락교회 교육부<br>
+      한 분이 <b>한 강의</b>만 신청하실 수 있습니다. 같은 번호로 다시 신청하면 강의를 변경할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="done" id="done">
+    <div class="done-card">
+      <div class="done-ic">✓</div>
+      <h3>신청 완료!</h3>
+      <p id="doneName"></p>
+      <div class="big" id="doneLec"></div>
+      <p>8월 29일(토) 오후 3:30 강의실에서 뵙겠습니다.</p>
+      <button class="done-close" id="doneClose">확인</button>
+    </div>
+  </div>
+
+<script>
+/* ============================================================
+   REFUEL Conference 강의 신청  —  설정
+   ▸ 아래 GAS_URL 에 구글 Apps Script 웹앱 배포 URL 을 붙여넣으세요.
+     (배포 가이드 참고. /exec 로 끝나는 주소)
+   ============================================================ */
+var GAS_URL = "https://script.google.com/macros/s/AKfycbyNufdIXHawGnoA59AxcWp57WiuJtsuqSe1rUa0yjLSQsGbfL2WovEOKfbqCDUzZwDC/exec";
+var CAP = 80;
+
+var LECTURES = [
+  { id:"yoo",  cat:"Z·알파 세대", title:"Z세대·알파세대 이해와 소통", speaker:"유승현 목사", img:"images/yoo.jpg",
+    role:"구리목양교회 협동목사 · 다음세대 사역 16년",
+    bio:["전) 온누리교회 차세대 부목사","저서 『교회학교를 리셋하라』(꿈미, 2025)",
+         "유튜브 '유목민이야기' 운영 · 60여 개 교회 탐방","장로회신학대학교 M.Div"] },
+  { id:"lee",  cat:"어린이 심리", title:"어린이 ADHD 이해와 소통", speaker:"이예나 상담사", img:"images/lee.jpg",
+    role:"임상심리전문가(한국심리학회 공인)",
+    bio:["고려대학교 대학원 심리학부 박사과정(임상·상담심리 전공)","현) 오늘 정신건강의학과 임상심리전문가",
+         "현) 고려대 학생상담센터 객원상담사","정신보건임상심리사 · 상담심리사 · 청소년상담사"] },
+  { id:"choi", cat:"영성·회복", title:"교사의 영성과 회복", speaker:"최창수 목사", img:"images/choi.jpg",
+    role:"수지예본교회 고등부",
+    bio:["전) 분당우리교회 청소년 팀장 · 군산드림교회 어린이 팀장","저서 『십대를 위한 소요리 성경공부』",
+         "저서 『어린이를 위한 소요리 설교』(생명의말씀사)","공저 『아이들이 교회로 몰려온다』"] },
+  { id:"kim",  cat:"조직·리더십", title:"교회교육 조직과 리더십", speaker:"김성중 교수", img:"images/kim.jpg",
+    role:"장로회신학대학교 기독교교육과 교수",
+    bio:["기독교교육리더십연구소 소장 · 대한민국교육봉사단 대표","한국기독교교육학회 부회장",
+         "저서 『한국교회 3355 모여라』(두란노) 외 28권","넥스트교회교육원 고문이사"] },
+  { id:"hwang",cat:"트렌드", title:"시대의 트렌드와 다음세대", speaker:"황인권 대표", img:"images/hwang.jpg",
+    role:"인권앤파트너스 대표 · 숙명여대 겸임교수",
+    bio:["지구촌교회 초대 홍보기획실장 · 필그림하우스 브랜딩","코스타·유스코스타 강사 15년",
+         "홍익대 IDAS 디지털미디어디자인 전공","저서 『지금 여기 선교의 시대』 외 공저"] }
+];
+
+/* ---------- JSONP helper ---------- */
+var _jcnt = 0;
+function jsonp(params, cb, onErr){
+  if(!GAS_URL || GAS_URL.indexOf("PASTE_") === 0){ if(onErr) onErr("noconfig"); return; }
+  var name = "__rfcb" + (++_jcnt) + "_" + Date.now();
+  var s = document.createElement("script");
+  var timer = setTimeout(function(){ cleanup(); if(onErr) onErr("timeout"); }, 12000);
+  function cleanup(){ clearTimeout(timer); delete window[name];
+    if(s.parentNode) s.parentNode.removeChild(s); }
+  window[name] = function(data){ cleanup(); cb(data); };
+  var q = Object.keys(params).map(function(k){
+    return encodeURIComponent(k)+"="+encodeURIComponent(params[k]); }).join("&");
+  s.src = GAS_URL + "?callback=" + name + "&" + q;
+  s.onerror = function(){ cleanup(); if(onErr) onErr("neterr"); };
+  document.head.appendChild(s);
+}
+
+/* ---------- state ---------- */
+var selected = null;
+var counts = {};   // id -> number
+var byId = {};
+LECTURES.forEach(function(l){ byId[l.id]=l; });
+
+/* ---------- render cards ---------- */
+function seatClass(remaining){ if(remaining<=0) return "red"; if(remaining<=15) return "amber"; return ""; }
+function buildCards(){
+  var g = document.getElementById("grid");
+  g.innerHTML = LECTURES.map(function(l){
+    return '<div class="card" id="card-'+l.id+'">'
+      + '<div class="ph"><img src="'+l.img+'" alt="'+l.speaker+'" loading="lazy">'
+      +   '<span class="cat">'+l.cat+'</span>'
+      +   '<span class="seat load" id="seat-'+l.id+'">신청현황 확인중</span></div>'
+      + '<div class="cbody">'
+      +   '<h3 class="ctitle">'+l.title+'</h3>'
+      +   '<div class="cspk">'+l.speaker+'</div>'
+      +   '<p class="cbio">'+l.role+'</p>'
+      +   '<button class="more-btn" data-id="'+l.id+'">＋ 강사 약력 자세히</button>'
+      +   '<div class="more" id="more-'+l.id+'"><ul>'
+      +      l.bio.map(function(b){return "<li>"+b+"</li>";}).join("")
+      +   '</ul></div>'
+      +   '<div class="cfoot">'
+      +     '<div class="barwrap"><div class="bar" id="bar-'+l.id+'"></div></div>'
+      +     '<button class="pick" id="pick-'+l.id+'" data-id="'+l.id+'">이 강의 신청</button>'
+      +   '</div>'
+      + '</div></div>';
+  }).join("");
+
+  g.querySelectorAll(".more-btn").forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = document.getElementById("more-"+b.dataset.id);
+      m.classList.toggle("open");
+      b.textContent = m.classList.contains("open") ? "－ 약력 접기" : "＋ 강사 약력 자세히";
+    });
+  });
+  g.querySelectorAll(".pick").forEach(function(b){
+    b.addEventListener("click", function(){ selectLecture(b.dataset.id); });
+  });
+}
+
+function selectLecture(id){
+  if((counts[id]||0) >= CAP){ return; }
+  selected = id;
+  LECTURES.forEach(function(l){
+    var card=document.getElementById("card-"+l.id);
+    var pick=document.getElementById("pick-"+l.id);
+    var on = (l.id===id);
+    card.classList.toggle("selected", on);
+    if((counts[l.id]||0) < CAP){
+      pick.classList.toggle("sel", on);
+      pick.textContent = on ? "✓ 선택됨" : "이 강의 신청";
+    }
+  });
+  var box=document.getElementById("selBox"), l=byId[id];
+  box.classList.remove("empty");
+  document.getElementById("selVal").textContent = l.title + " · " + l.speaker;
+  document.getElementById("formCard").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ---------- counts / seats ---------- */
+function applyCounts(c){
+  counts = c || {};
+  LECTURES.forEach(function(l){
+    var used = counts[l.id]||0, remaining = Math.max(0, CAP-used);
+    var seat=document.getElementById("seat-"+l.id);
+    var bar=document.getElementById("bar-"+l.id);
+    var pick=document.getElementById("pick-"+l.id);
+    seat.classList.remove("load","amber","red");
+    var sc=seatClass(remaining); if(sc) seat.classList.add(sc);
+    seat.textContent = remaining>0 ? ("잔여 "+remaining+"석") : "마감";
+    var pct = Math.min(100, Math.round(used/CAP*100));
+    bar.style.width = pct+"%"; bar.classList.remove("amber","red");
+    if(sc) bar.classList.add(sc);
+    var card=document.getElementById("card-"+l.id);
+    if(remaining<=0){
+      card.classList.add("full");
+      pick.disabled=true; pick.classList.remove("sel"); pick.textContent="마감되었습니다";
+      if(selected===l.id){ selected=null; card.classList.remove("selected");
+        document.getElementById("selBox").classList.add("empty");
+        document.getElementById("selVal").textContent="위에서 강의를 선택해 주세요"; }
+    } else {
+      card.classList.remove("full"); pick.disabled=false;
+      if(pick.textContent==="마감되었습니다") pick.textContent="이 강의 신청";
+    }
+  });
+}
+function loadCounts(){
+  jsonp({action:"counts"}, function(d){
+    if(d && d.ok){ if(d.cap) CAP=d.cap; applyCounts(d.counts); }
+  }, function(err){
+    if(err==="noconfig"){ showConfigWarn(); }
+    // 실패해도 카드는 보이며, 신청 시 서버가 최종 판정
+  });
+}
+function showConfigWarn(){
+  var w=document.getElementById("configWarn");
+  w.style.display="block";
+  w.innerHTML="⚙️ <b>연결 설정 필요</b> — 이 화면은 미리보기입니다. 관리자는 배포 가이드에 따라 "
+    +"Apps Script 웹앱 주소를 <code>index.html</code>의 <code>GAS_URL</code>에 입력해 주세요.";
+  // 미리보기용 더미 표시
+  LECTURES.forEach(function(l){
+    var seat=document.getElementById("seat-"+l.id);
+    seat.classList.remove("load"); seat.textContent="잔여 80석";
+  });
+}
+
+/* ---------- phone formatting ---------- */
+function fmtPhone(v){
+  var d = v.replace(/\D/g,"").slice(0,11);
+  if(d.length<4) return d;
+  if(d.length<8) return d.slice(0,3)+"-"+d.slice(3);
+  return d.slice(0,3)+"-"+d.slice(3,7)+"-"+d.slice(7);
+}
+document.getElementById("fPhone").addEventListener("input", function(e){
+  e.target.value = fmtPhone(e.target.value);
+});
+
+/* ---------- messages ---------- */
+function showMsg(type, html){
+  var m=document.getElementById("msg");
+  m.className="msg show "+type; m.innerHTML=html;
+}
+function hideMsg(){ document.getElementById("msg").className="msg"; }
+
+/* ---------- submit ---------- */
+var submitting=false;
+function doRegister(force){
+  var dept=document.getElementById("fDept").value.trim();
+  var name=document.getElementById("fName").value.trim();
+  var phoneRaw=document.getElementById("fPhone").value.replace(/\D/g,"");
+  hideMsg();
+  if(!selected){ showMsg("err","먼저 위에서 신청할 강의를 선택해 주세요.");
+    document.getElementById("grid").scrollIntoView({behavior:"smooth"}); return; }
+  if(!dept){ showMsg("err","부서를 입력해 주세요."); return; }
+  if(!name){ showMsg("err","이름을 입력해 주세요."); return; }
+  if(phoneRaw.length<10){ showMsg("err","휴대전화 번호를 정확히 입력해 주세요."); return; }
+  if(GAS_URL.indexOf("PASTE_")===0){
+    showMsg("warn","아직 서버가 연결되지 않았습니다. 관리자에게 문의해 주세요. (미리보기 모드)"); return; }
+
+  submitting=true; var btn=document.getElementById("submitBtn");
+  btn.disabled=true; btn.textContent="신청 중...";
+  jsonp({action:"register", lecture:selected, dept:dept, name:name, phone:phoneRaw, force:(force?1:0)},
+    function(d){
+      submitting=false; btn.disabled=false; btn.textContent="신청하기";
+      if(!d){ showMsg("err","응답을 받지 못했습니다. 잠시 후 다시 시도해 주세요."); return; }
+      if(d.ok){
+        if(d.counts) applyCounts(d.counts);
+        var l=byId[selected];
+        document.getElementById("doneName").textContent = name+"님 ("+dept+")";
+        document.getElementById("doneLec").textContent = l.title+" · "+l.speaker
+          + (d.moved ? "  (변경됨)" : "");
+        document.getElementById("done").classList.add("show");
+      } else if(d.code==="full"){
+        showMsg("err","죄송합니다. 선택하신 <b>"+byId[selected].title+"</b> 강의가 방금 마감되었습니다. 다른 강의를 선택해 주세요.");
+        loadCounts();
+      } else if(d.code==="exists"){
+        var cur = d.lecture && byId[d.lecture] ? byId[d.lecture].title : "다른 강의";
+        showMsg("warn","이 번호(<b>"+document.getElementById("fPhone").value+"</b>)로 이미 <b>"+cur
+          +"</b> 강의에 신청되어 있습니다.<br>선택하신 <b>"+byId[selected].title
+          +"</b>(으)로 <b>변경</b>하시겠어요?<br><button class='act' id='forceBtn'>네, 변경합니다</button>");
+        document.getElementById("forceBtn").addEventListener("click", function(){ hideMsg(); doRegister(true); });
+      } else if(d.code==="dup"){
+        showMsg("ok","이미 <b>"+byId[selected].title+"</b> 강의에 신청 완료되어 있습니다. 추가 신청은 필요 없습니다.");
+      } else {
+        showMsg("err", d.msg || "신청 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      }
+    },
+    function(err){
+      submitting=false; btn.disabled=false; btn.textContent="신청하기";
+      showMsg("err","서버 연결에 실패했습니다. 네트워크를 확인하고 다시 시도해 주세요.");
+    });
+}
+document.getElementById("submitBtn").addEventListener("click", function(){ if(!submitting) doRegister(false); });
+document.getElementById("doneClose").addEventListener("click", function(){
+  document.getElementById("done").classList.remove("show");
+  document.getElementById("fName").value=""; document.getElementById("fPhone").value="";
+  loadCounts();
+});
+
+/* ---------- init ---------- */
+buildCards();
+loadCounts();
+</script>
+</body>
+</html>
