@@ -99,9 +99,13 @@
   .field{margin-bottom:15px}
   .field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:6px}
   .field label .req{color:var(--orange-d)}
-  .field input{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;
-    font-size:16px;font-family:inherit;background:#fbfcfe;transition:border-color .15s}
-  .field input:focus{outline:none;border-color:var(--navy2);background:#fff}
+  .field input,.field select{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;
+    font-size:16px;font-family:inherit;color:var(--ink);background:#fbfcfe;transition:border-color .15s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--navy2);background:#fff}
+  .field select{-webkit-appearance:none;appearance:none;padding-right:40px;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a6b82' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 15px center}
+  .field select:invalid{color:var(--sub)}
   .field .fh{font-size:12px;color:var(--sub);margin-top:5px}
   .submit{width:100%;border:none;background:var(--orange);color:#fff;font-size:17px;font-weight:800;
     padding:16px;border-radius:13px;cursor:pointer;font-family:inherit;margin-top:6px;transition:background .15s}
@@ -181,14 +185,24 @@
       </div>
       <div class="field">
         <label>부서 <span class="req">*</span></label>
-        <input id="fDept" list="deptList" placeholder="예) 초등부" autocomplete="off">
-        <datalist id="deptList">
-          <option value="영아부"></option><option value="유아부"></option>
-          <option value="유치부"></option><option value="유년부"></option>
-          <option value="초등부"></option><option value="소년부"></option>
-          <option value="중등부"></option><option value="고등부"></option>
-          <option value="영어예배부"></option><option value="교육부 교역자"></option>
-        </datalist>
+        <select id="fDept" required>
+          <option value="" disabled selected>부서를 선택해 주세요</option>
+          <option value="사랑부">사랑부</option>
+          <option value="영아부">영아부</option>
+          <option value="유아부">유아부</option>
+          <option value="유치부">유치부</option>
+          <option value="유년부">유년부</option>
+          <option value="초등부">초등부</option>
+          <option value="소년부">소년부</option>
+          <option value="CebC">CebC</option>
+          <option value="중등부">중등부</option>
+          <option value="고등부">고등부</option>
+          <option value="대학부">대학부</option>
+          <option value="교사교육부">교사교육부</option>
+          <option value="교회교육원">교회교육원</option>
+          <option value="교육부">교육부</option>
+          <option value="교역자">교역자</option>
+        </select>
       </div>
       <div class="field">
         <label>이름 <span class="req">*</span></label>
