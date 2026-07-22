@@ -11,8 +11,9 @@
   :root{
     --navy:#0f2540; --navy2:#1b3a5f; --orange:#ff7a45; --orange-d:#e85f2a;
     --green:#1faa6b; --amber:#e6a100; --red:#d33a3a;
-    --ink:#1a2230; --sub:#5a6b82; --line:#e4e9f0; --bg:#f5f7fa; --card:#fff;
-    --shadow:0 4px 20px rgba(15,37,64,.08);
+    --ink:#1a2230; --sub:#5a6b82; --line:#e4e9f0; --bg:#0c1129; --card:#fff;
+    --onbg:#eaf1fb; --onbg-sub:#9fb2cc;
+    --shadow:0 6px 24px rgba(0,0,0,.28);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -22,7 +23,7 @@
   a{color:inherit}
 
   /* HERO */
-  .hero{background:#0a1526; color:#fff; text-align:center; position:relative; overflow:hidden;
+  .hero{background:#0c1129; color:#fff; text-align:center; position:relative; overflow:hidden;
     display:flex; justify-content:center;}
   .hero .poster{display:block; width:100%; max-width:600px; max-height:88vh;
     object-fit:contain; margin:0 auto;}
@@ -34,7 +35,8 @@
   .meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
   .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
     padding:6px 13px;border-radius:999px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
-  .lead{max-width:640px;margin:4px auto 22px;font-size:13.5px;color:var(--sub);line-height:1.7;text-align:center}
+  .lead{max-width:640px;margin:4px auto 22px;font-size:13.5px;color:var(--onbg-sub);line-height:1.7;text-align:center}
+  .lead b{color:var(--onbg)}
 
   .wrap{max-width:920px;margin:0 auto;padding:22px 16px 80px}
 
@@ -47,8 +49,9 @@
   .sched-row.hi .sched-time{color:var(--orange-d)}
   .sched-row.hi{font-weight:600}
 
-  .section-title{font-size:20px;font-weight:800;margin:8px 4px 4px}
-  .section-sub{font-size:13.5px;color:var(--sub);margin:0 4px 18px}
+  .section-title{font-size:20px;font-weight:800;margin:8px 4px 4px;color:var(--onbg)}
+  .section-sub{font-size:13.5px;color:var(--onbg-sub);margin:0 4px 18px}
+  .section-sub b{color:var(--onbg)}
 
   /* CARDS */
   .grid{display:grid;grid-template-columns:1fr;gap:16px}
@@ -111,7 +114,8 @@
   .msg .act{display:inline-block;margin-top:9px;background:var(--navy);color:#fff;border:none;
     padding:9px 15px;border-radius:9px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
 
-  .footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:34px;line-height:1.7}
+  .footer{text-align:center;color:var(--onbg-sub);font-size:12.5px;margin-top:34px;line-height:1.7}
+  .footer b{color:var(--onbg)}
   .config-warn{background:#fff6e0;border:1px solid #f2dea0;color:#8a6100;border-radius:12px;
     padding:14px 16px;margin-bottom:20px;font-size:13.5px;font-weight:600;display:none}
 
@@ -245,7 +249,8 @@ var LECTURES = [
   { id:"hwang",cat:"트렌드", title:"시대의 트렌드와 다음세대", speaker:"황인권 대표", img:"images/hwang.jpg",
     role:"인권앤파트너스 대표 · 숙명여대 겸임교수",
     bio:["지구촌교회 초대 홍보기획실장 · 필그림하우스 브랜딩","코스타·유스코스타 강사 15년",
-         "홍익대 IDAS 디지털미디어디자인 전공","저서 『지금 여기 선교의 시대』 외 공저"] }
+         "저서 『5無 교회가 온다』(2025 국민일보 올해 최고의 책)",
+         "공저 『지금 여기 선교의 시대』 · 『크리스찬 인사이트』"] }
 ];
 
 /* ---------- JSONP helper ---------- */
