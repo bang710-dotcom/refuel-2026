@@ -134,6 +134,7 @@
   .msg.warn{background:#fff6e0;color:#8a6100;border:1px solid #f2dea0}
   .msg .act{display:inline-block;margin-top:9px;background:var(--navy);color:#fff;border:none;
     padding:9px 15px;border-radius:9px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .msg .act.ghost{background:#fff;color:var(--sub);border:1.5px solid var(--line);margin-left:8px}
 
   .footer{text-align:center;color:var(--onbg-sub);font-size:12.5px;margin-top:34px;line-height:1.7}
   .footer b{color:var(--onbg)}
@@ -498,8 +499,10 @@ function doRegister(force){
         var cur = d.lecture && byId[d.lecture] ? byId[d.lecture].title : "다른 강의";
         showMsg("warn","이 번호(<b>"+document.getElementById("fPhone").value+"</b>)로 이미 <b>"+cur
           +"</b> 강의에 신청되어 있습니다.<br>선택하신 <b>"+byId[selected].title
-          +"</b>(으)로 <b>변경</b>하시겠어요?<br><button class='act' id='forceBtn'>네, 변경합니다</button>");
+          +"</b>(으)로 <b>변경</b>하시겠어요?<br><button class='act' id='forceBtn'>네, 변경합니다</button>"
+          +"<button class='act ghost' id='cancelBtn'>취소</button>");
         document.getElementById("forceBtn").addEventListener("click", function(){ hideMsg(); doRegister(true); });
+        document.getElementById("cancelBtn").addEventListener("click", function(){ hideMsg(); });
       } else if(d.code==="dup"){
         showMsg("ok","이미 <b>"+byId[selected].title+"</b> 강의에 신청 완료되어 있습니다. 추가 신청은 필요 없습니다.");
       } else {
